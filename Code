@@ -1,0 +1,131 @@
+#include<iostream>
+#include<string>
+#include<stdlib.h>
+using namespace std;
+
+char A[3][3]={{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+
+bool Empty()
+{
+    for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<3;j++)
+        {
+            if(A[i][j]=='*' || A[i][j]=='0')
+            {
+                continue;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+bool Check()//for checking who won
+{
+    for(int i=0;i<3;i++)
+    {
+        if((A[i][0]==A[i][1] && A[i][0]==A[i][2]) || (A[0][i]==A[1][i] && A[0][i]==A[2][i]))
+        {
+            return true;
+        }
+    }
+    if((A[0][0]==A[1][1] && A[0][0]==A[2][2])||(A[0][2]==A[1][1] && A[0][2]==A[2][0]))
+    {
+        return true;
+    }
+    return false;
+}
+
+void structure()
+{
+   cout<<"  |  |  \n";
+   cout<<" "<<A[0][0]<<"|"<<" "<<A[0][1]<<"|"<<" "<<A[0][2]<<"\n";
+   cout<<"---------\n";
+   cout<<" "<<A[1][0]<<"|"<<" "<<A[1][1]<<"|"<<" "<<A[1][2]<<"\n";
+   cout<<"---------\n";
+   cout<<" "<<A[2][0]<<"|"<<" "<<A[2][1]<<"|"<<" "<<A[2][2]<<"\n";
+   cout<<"  |  |  \n";
+}
+
+void Insert(char c)
+{
+    int num;
+    cout<<"enter your response"<<endl;
+    cin>>num;
+    switch(num)
+    {
+    case 1:
+        A[0][0]=c;
+        break;
+    case 2:
+        A[0][1]=c;
+        break;
+    case 3:
+        A[0][2]=c;
+        break;
+    case 4:
+        A[1][0]=c;
+        break;
+    case 5:
+        A[1][1]=c;
+        break;
+    case 6:
+        A[1][2]=c;
+        break;
+    case 7:
+        A[2][0]=c;
+        break;
+    case 8:
+        A[2][1]=c;
+        break;
+    case 9:
+        A[2][2]=c;
+        break;
+    default:
+        cout<<"invalid input"<<endl;
+
+
+    }
+}
+
+int main()
+{
+    cout<<"enter number to select your response"<<endl;
+    string s1;
+    string s2;
+    cout<<"enter first player name\n";
+    getline(cin,s1);
+    cout<<"enter second player name\n";
+    getline(cin,s2);
+    cout<<s1<<" will play first\n";
+    cout<<s2<<" will play second\n";
+    while(Empty())
+    {
+      structure();
+      Insert('*');
+      system("cls");
+      structure();
+      if(Check())
+      {
+          cout<<s1<<" won!!!!"<<endl;
+          return 0;
+      }
+      Insert('0');
+      system("cls");
+      if(Check())
+      {
+          cout<<s2<<" won!!!!"<<endl;
+          return 0;
+      }
+
+    }
+    cout<<"Match draw"<<endl;
+    return 0;
+
+
+}
